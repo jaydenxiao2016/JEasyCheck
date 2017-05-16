@@ -27,7 +27,6 @@ import HistorySearchDao from "../../dao/HistorySearchDao";
 import CompanyModel from "../../model/CompanyModel";
 import MoreMenu, {MORE_MENU} from "../../common/MoreMenu";
 import CustomThemePage from "../about/CustomThemePage";
-import moment from "moment";
 var tracesDataDao = new TracesDataDao();
 var historySearchDao = new HistorySearchDao();
 
@@ -39,7 +38,7 @@ export default class HomePage extends Component {
             customThemeViewVisible: false,
             isLoading: false,
             isEmptyOrFail: false,
-            emptyOrFailTip:"",
+            emptyOrFailTip: "",
             traceDatas: null,
             dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
         };
@@ -236,16 +235,26 @@ export default class HomePage extends Component {
     }
 
     /**
-     * 暂无新的物流信息view
+     * 暂无新的物流信息或网络错误view
      */
     renderEmptyOrFailView() {
         return <View style={{flex: 1, backgroundColor: Colors.white, alignItems: 'center', justifyContent: 'center'}}>
-            {/*上部分*/}
             <View style={{alignItems: 'center'}}>
+                {/*上部分*/}
                 <Image source={require('../../res/images/ic_no_exist.png')}
                        style={{width: 100, height: 100, marginTop: 10}}
                        resizeMode={'contain'}/>
+                {/*中间*/}
                 <Text style={{padding: 8, color: Colors.gray}}>{this.state.emptyOrFailTip}</Text>
+                {/*下部分*/}
+                {
+                    this.state.emptyOrFailTip == Constants.netFailTip ?
+                        <TouchableOpacity activeOpacity={0.8}
+                                          style={[styles.retryViewStyle, {backgroundColor: this.props.theme.themeColor}]}
+                                          onPress={() => this._onclickRetry()}>
+                            <Text style={{color: Colors.white}}>{Constants.RetryTip}</Text>
+                        </TouchableOpacity> : null
+                }
             </View>
         </View>
     }
@@ -271,7 +280,7 @@ export default class HomePage extends Component {
             this.setState({
                 isLoading: false,
                 isEmptyOrFail: true,
-                emptyOrFailTip:Constants.NoHistoryRecord==err?Constants.NoNewTip:Constants.netFailTip,
+                emptyOrFailTip: Constants.NoHistoryRecord == err ? Constants.NoNewTip : Constants.netFailTip,
             });
         });
     }
@@ -368,9 +377,16 @@ export default class HomePage extends Component {
         this.setState({
             traceDatas: traceDatas,
             dataSource: this.state.dataSource.cloneWithRows(traceDatas),
-            emptyOrFailTip:Constants.NoNewTip,
+            emptyOrFailTip: Constants.NoNewTip,
             isEmptyOrFail: traceDatas.length > 0 ? false : true,
         })
+    }
+    /**
+     * 点击重新尝试
+     * @private
+     */
+    _onclickRetry() {
+        this._loadData();
     }
 }
 
@@ -415,4 +431,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+    retryViewStyle: {
+        borderRadius: 2,
+        backgroundColor: Colors.blue,
+        width: 150,
+        height: 35,
+        marginTop: 15,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 })

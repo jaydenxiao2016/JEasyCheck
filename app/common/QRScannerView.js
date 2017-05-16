@@ -350,6 +350,13 @@ class QRScannerRectView extends Component {
             easing: Easing.linear
         }).start(() => this.scannerLineMove());
     }
+    componentWillUnmount(){
+        Animated.timing(this.state.animatedValue, {
+            toValue: this.props.rectHeight,
+            duration: this.props.scanBarAnimateTime,
+            easing: Easing.linear
+        }).stop()
+    }
 }
 
 /**

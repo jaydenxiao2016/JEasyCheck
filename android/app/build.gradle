@@ -90,8 +90,8 @@ android {
         applicationId "com.jeasycheck"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 110
-        versionName "1.1.0"
+        versionCode 103
+        versionName "1.0.3"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

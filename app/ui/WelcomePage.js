@@ -3,7 +3,7 @@
  * @flow
  * **/
 import React, {Component} from "react";
-import {Image, InteractionManager, StyleSheet, View} from "react-native";
+import {Image, StyleSheet, View} from "react-native";
 import HistorySearchDao from "../dao/HistorySearchDao";
 import HomePage from "./main/HomePage";
 var Dimensions = require('Dimensions');
@@ -17,8 +17,7 @@ export default class WelcomePage extends Component {
             this.theme = theme;
             console.log(theme)
         });
-        InteractionManager.runAfterInteractions(() => {
-            setTimeout(() => {
+            this.timeOut = setTimeout(() => {
                 navigator.resetTo({
                     component: HomePage,
                     name: 'HomePage',
@@ -27,9 +26,11 @@ export default class WelcomePage extends Component {
                     }
                 });
             }, 2000)
-        })
     }
-
+componentWillUnmount(){
+        clearTimeout(this.timeOut);
+    }
+	
     render() {
         return (
             <View style={styles.container}>
