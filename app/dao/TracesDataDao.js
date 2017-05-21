@@ -133,7 +133,6 @@ export default class TracesDataDao {
                             total++;
                             errorStr = +err
                             if (total == companyModels.length) {
-                                alert(errorStr)
                                 reject(errorStr);
                             }
                         })

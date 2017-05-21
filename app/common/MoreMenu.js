@@ -3,7 +3,7 @@
  * @flow
  */
 import React, {Component, PropTypes} from "react";
-import {Share,Alert,Text, TouchableHighlight, View} from "react-native";
+import {Share, Text, TouchableHighlight, View,Platform} from "react-native";
 import Popover from "../common/Popover";
 import AboutMePage from "../ui/about/AboutMePage";
 import Constants from "../res/Constants";
@@ -109,9 +109,14 @@ export default class MoreMenu extends Component {
      */
     onShare() {
         Share.share({
-            message: Constants.ShareContent,
+            message: Constants.ShareContent+(Platform.OS === 'ios'?"":Constants.ShareUrl),
             url: Constants.ShareUrl,
-            title:Constants.ShareTitle
+            title: Constants.ShareTitle
+        },{
+            dialogTitle: Constants.ShareTitle,
+            excludedActivityTypes: [
+                'com.apple.UIKit.activity.PostToTwitter'],
+            tintColor: 'green'
         });
     };
 

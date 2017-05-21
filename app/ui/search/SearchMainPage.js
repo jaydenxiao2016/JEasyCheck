@@ -74,7 +74,7 @@ export default class SearchMainPage extends Component {
                 {/*输入框和扫描图标*/}
                 <View style={styles.scanContainerStyle}>
                     <TextInput
-                        style={styles.inputStyle}
+                        style={[styles.inputStyle,{borderColor:this.props.theme.themeColor}]}
                         underlineColorAndroid='transparent'
                         placeholder={"请输入或扫描运单号"}
                         onfocus={true}
@@ -262,10 +262,9 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         paddingBottom: 8,
         paddingRight: 40,
-        fontSize: 18,
+        fontSize: 16,
         height: 40,
         width: GlobalStyles.window_width - 70,
-        borderColor: 'gray',
         borderWidth: 1,
         margin: 10,
         borderRadius: 2
