@@ -59,8 +59,6 @@ export default class SearchMainPage extends Component {
                 height: 20,
             }}
         /></TouchableOpacity> : null;
-        //快递列表
-        let renderExpressListView = this.state.companyData ? this.renderExpressListView() : null;
         return (
             <View style={GlobalStyles.listView_container}>
                 {/*标题*/}
@@ -74,7 +72,7 @@ export default class SearchMainPage extends Component {
                 {/*输入框和扫描图标*/}
                 <View style={styles.scanContainerStyle}>
                     <TextInput
-                        style={[styles.inputStyle,{borderColor:this.props.theme.themeColor}]}
+                        style={[styles.inputStyle, {borderColor: this.props.theme.themeColor}]}
                         underlineColorAndroid='transparent'
                         placeholder={"请输入或扫描运单号"}
                         onfocus={true}
@@ -96,24 +94,38 @@ export default class SearchMainPage extends Component {
                     {/*扫描按钮*/}
                     <TouchableOpacity onPress={() => this._scanClick()}>
                         <Image source={require('../../res/images/ic_scan.png')}
-                               style={[{width: 35, height: 35, marginRight: 5},this.props.theme.styles.tabBarSelectedIcon]}/>
+                               style={[{
+                                   width: 35,
+                                   height: 35,
+                                   marginRight: 5
+                               }, this.props.theme.styles.tabBarSelectedIcon]}/>
                     </TouchableOpacity>
                 </View>
                 {/*快递列表*/}
-                {renderExpressListView}
+                {this.renderExpressListView()}
             </View>
         );
     }
 
+    /**
+     * 符合的快递公司列表
+     * @returns {XML}
+     */
     renderExpressListView() {
-        return <View>
-            <ListView
-                dataSource={this.state.dataSource}
-                renderRow={(e) => this.renderRow(e)}
-            />
+
+        let renderExpressListView = this.state.companyData ? <ListView
+            dataSource={this.state.dataSource}
+            renderRow={(e) => this.renderRow(e)}
+        /> : null;
+
+        let otherExpressView = this.state.expNo ?
             <TouchableOpacity style={{alignItems: 'center'}} onPress={() => this._onClickOther()}>
                 <Text style={{padding: 8, color: this.props.theme.themeColor}}>选择其他快递公司</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> : null;
+
+        return <View>
+            {renderExpressListView}
+            {otherExpressView}
         </View>
     }
 
@@ -124,7 +136,7 @@ export default class SearchMainPage extends Component {
      * @param rowID
      */
     renderRow(rowData, sectionId, rowID) {
-        let logo=rowData.logo?{uri: Constants.LogoBaseUrl + rowData.logo}:require('../../res/images/ic_logo_default.png');
+        let logo = rowData.logo ? {uri: Constants.LogoBaseUrl + rowData.logo} : require('../../res/images/ic_logo_default.png');
         return <TouchableOpacity style={styles.itemStyle} onPress={() => this._onclickItem(rowData)}>
             <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10, marginRight: 10}}>
                 <Image source={logo}
@@ -221,6 +233,10 @@ export default class SearchMainPage extends Component {
                     }
                 }
             ).catch((error) => {
+            this.setState({
+                companyData: null,
+                dataSource: this.state.dataSource.cloneWithRows([])
+            });
             console.log("接口访问错误" + error)
         });
     }
@@ -233,7 +249,7 @@ export default class SearchMainPage extends Component {
         // 遍历
         for (var i = 0; i < allCompanyDatas.length; i++) {
             let company = allCompanyDatas[i].company;
-            let logoUrl =null;
+            let logoUrl = null;
             // 4. 遍历所有的车数组
             for (var j = 0; j < company.length; j++) {
                 if (code == company[j].code) {

@@ -210,7 +210,7 @@ export default class SearchResultPage extends Component {
                 <View style={{
                     marginLeft: 17,
                     width: 1,
-                    height: 70,
+                    height: 80,
                     backgroundColor: Colors.gray,
                     marginTop: rowID == 0 ? 6 : 0
                 }}></View>
@@ -219,7 +219,9 @@ export default class SearchResultPage extends Component {
             </View>
             {/*右部分*/}
             <View style={{marginLeft: 15, marginTop: 5, marginRight: 20, marginBottom: 10}}>
-                <Text style={{color: rowID == 0 ? Colors.black : Colors.gray}}>{rowData.AcceptStation}</Text>
+                <Text
+                    numberOfLines={3}
+                    style={{color: rowID == 0 ? Colors.black : Colors.gray}}>{rowData.AcceptStation}</Text>
                 <Text
                     style={{color: rowID == 0 ? Colors.black : Colors.gray}}>{rowData.AcceptTime}</Text>
             </View>
