@@ -1,0 +1,29 @@
+{
+  "name": "JEasyCheck",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "buffer": "^5.0.6",
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.44.2",
+    "react-native-camera": "^0.6.0",
+    "react-native-deprecated-custom-components": "^0.1.0",
+    "react-native-easy-toast": "^1.0.6",
+    "react-native-parallax-scroll-view": "^0.19.0",
+    "react-native-storage": "^0.2.2",
+    "react-native-swipeout": "^2.1.1"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "1.9.2",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.6"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
