@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <!--设置透明背景-->
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFullscreen">false</item>
     </style>
 
 </resources>

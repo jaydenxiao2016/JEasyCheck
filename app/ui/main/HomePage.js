@@ -125,7 +125,6 @@ export default class HomePage extends Component {
     _onHardwareBackPress(e) {
         if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
             //最近2秒内按过back键，可以退出应用。
-			this.props.navigator.pop();
             return false;
         }
         this.lastBackPressed = Date.now();
