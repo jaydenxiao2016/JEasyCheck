@@ -37,7 +37,6 @@
 - "react-native-storage": "^0.2.2",
 - "react-native-swipeout": "^2.1.1"（滑动删除）
 
-[仓库地址](https://github.com/jaydenxiao2016/JEasyCheck)
 
 >项目运行步骤如下：
 - 第一步：npm install
@@ -62,6 +61,8 @@
 - listview的数据源更新了，但界面没跟着调整，这要涉及到数据深浅拷贝的问题，用JSON.parse(JSON.stringify(this.state.traceDatas))深拷贝能解决这个问题，具体例子可参考本项目的首页删除列表功能
 - 打包android apk时不能直接用android studio的可视化generate signed APK打包方式，这样打包的apk会因为缺少index.android.bundle文件打开时直接奔溃，尽量用RN官方推荐的方式打包
 - 还有很多细节的东西，一时半会也说不清楚，只有真正动手做了才能领会
+
+最后附上下载地址和源码 [Github源码](https://github.com/jaydenxiao2016/JEasyCheck) [安装地址](https://fir.im/jeasycheck)
 
 更多精彩文章请关注微信公众号"**Android经验分享**"：这里将长期为您分享Android高手经验、中外开源项目、源码解析、框架设计和Android好文推荐！
 
