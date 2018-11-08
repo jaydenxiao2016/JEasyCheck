@@ -1,0 +1,20 @@
+2017.6.28 todo:
+1.douya项目研究
+2.vlayout使用和原理研究
+3.共享动画share elements
+
+2017.7.03 todo:
+1.douya项目研究
+2.replugin研究
+3.react native 环信研究
+4.kotlin学习
+5.behavior研究
+
+
+2017.09.01
+1.ViewDragHelper
+2.Coordinatorlayout
+3.AppBarLayout
+4.CollapsingToolbarLayout
+5.NestedScrollView
+6.Behavior
